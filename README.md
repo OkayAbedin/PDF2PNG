@@ -134,4 +134,4 @@ Minhazul Abedin | OkayAbedin
 
 ## 📞 Support
 
-If you encounter any issues or have questions, please submit an issue through the repository or contact the developer at support@okayabedin.com
+If you encounter any issues or have questions, please submit an issue through the repository or contact the developer at contact.minhazabedin@gmail.com
