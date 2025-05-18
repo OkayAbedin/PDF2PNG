@@ -1,6 +1,10 @@
 @echo off
-echo PDF2PNG Converter Launcher
-echo =========================
+if exist "%~dp0banner.txt" (
+    type "%~dp0banner.txt"
+) else (
+    echo PDF2PNG Converter Launcher
+    echo =========================
+)
 echo.
 
 REM Check if poppler-bin exists

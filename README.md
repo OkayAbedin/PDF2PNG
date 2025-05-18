@@ -2,6 +2,8 @@
 
 A simple Windows application to convert PDF files to PNG images with a single click.
 
+Developed by Minhazul Abedin | OkayAbedin
+
 ## Features
 
 - System tray icon for quick access

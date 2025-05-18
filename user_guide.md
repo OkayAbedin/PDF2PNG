@@ -4,6 +4,8 @@
 
 PDF2PNG Converter is a simple utility that allows you to convert PDF files to high-quality PNG images with just a few clicks. This guide will help you get started.
 
+Developed by Minhazul Abedin | OkayAbedin
+
 ## Installation
 
 1. Run the installer and follow the on-screen instructions.

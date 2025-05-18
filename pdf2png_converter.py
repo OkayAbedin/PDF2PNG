@@ -13,6 +13,8 @@ import winreg
 # Set application name and version
 APP_NAME = "PDF2PNG Converter"
 APP_VERSION = "1.0.0"
+COMPANY_NAME = "OkayAbedin"
+AUTHOR = "Minhazul Abedin"
 
 # Get application paths
 if getattr(sys, 'frozen', False):
@@ -291,6 +293,26 @@ def select_and_convert_pdf():
             return True
     return False
 
+def show_about_dialog():
+    """Show an about dialog with company information"""
+    import tkinter as tk
+    from tkinter import messagebox
+    
+    # Create and hide the root window
+    root = Tk()
+    root.withdraw()
+    
+    # Show about message
+    messagebox.showinfo(
+        title=f"About {APP_NAME}",
+        message=f"{APP_NAME} v{APP_VERSION}\n\n" +
+                f"© 2025 {AUTHOR}\n" +
+                f"{COMPANY_NAME}\n\n" +
+                "A simple utility to convert PDF files to PNG images."
+    )
+    
+    root.destroy()
+
 def create_tray_icon():
     """Create system tray icon with menu"""
     # Check if icon file exists, use a default if not
@@ -301,6 +323,7 @@ def create_tray_icon():
         item('Convert PDF to PNG', select_and_convert_pdf),
         item('Open Output Folder', lambda: os.startfile(OUTPUT_FOLDER)),
         item('Run at Startup', lambda: add_to_startup(), checked=lambda _: is_in_startup()),
+        item('About', show_about_dialog),
         item('Exit', lambda: icon.stop())
     )
     

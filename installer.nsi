@@ -5,9 +5,9 @@
 RequestExecutionLevel admin
 
 !define APP_NAME "PDF2PNG Converter"
-!define COMP_NAME "YourCompany"
+!define COMP_NAME "OkayAbedin"
 !define VERSION "1.0.0"
-!define COPYRIGHT "Your Name"
+!define COPYRIGHT "Minhazul Abedin"
 !define DESCRIPTION "PDF to PNG Converter"
 !define INSTALLER_NAME "PDF2PNG_Converter_Setup.exe"
 !define MAIN_APP_EXE "PDF2PNG_Converter.exe"
@@ -59,6 +59,7 @@ FunctionEnd
 
 ; Pages
 !insertmacro MUI_PAGE_WELCOME
+!insertmacro MUI_PAGE_LICENSE "EULA.txt"
 !define MUI_PAGE_CUSTOMFUNCTION_PRE LocationOptionsPage
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE LocationOptionsLeave
 !insertmacro MUI_PAGE_DIRECTORY
@@ -126,8 +127,7 @@ Section -MainProgram
     
     FileClose $0
     Delete "$INSTDIR\writetest.txt"
-    ; Now proceed with installation
-    SetOutPath "$INSTDIR"
+    ; Now proceed with installation    SetOutPath "$INSTDIR"
     File "dist\PDF2PNG_Converter.exe"
     File "icon.ico"
     File "Run_PDF2PNG_Converter.bat"
@@ -135,16 +135,19 @@ Section -MainProgram
     File "setup_poppler.bat"
     File "fix_poppler.bat"
     File "user_guide.md"
+    File "EULA.txt"
+    File "release_notes.md"
+    File "banner.txt"
     
     ; Create Poppler bin directory and copy binaries
     SetOutPath "$INSTDIR\poppler-bin"
     File /nonfatal "poppler-bin\*.*"
-    
-    SetOutPath "$INSTDIR"
-      ; Create shortcuts to the batch launcher, not directly to the exe
+      SetOutPath "$INSTDIR"
+    ; Create shortcuts to the batch launcher, not directly to the exe
     CreateDirectory "$SMPROGRAMS\${APP_NAME}"
     CreateShortCut "$SMPROGRAMS\${APP_NAME}\${APP_NAME}.lnk" "$INSTDIR\Run_PDF2PNG_Converter.bat" "" "$INSTDIR\icon.ico"
     CreateShortCut "$SMPROGRAMS\${APP_NAME}\User Guide.lnk" "$INSTDIR\user_guide.md" "" "$INSTDIR\icon.ico"
+    CreateShortCut "$SMPROGRAMS\${APP_NAME}\Release Notes.lnk" "$INSTDIR\release_notes.md" "" "$INSTDIR\icon.ico"
     CreateShortCut "$SMPROGRAMS\${APP_NAME}\Uninstall ${APP_NAME}.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe"
     
     ; Add to desktop
@@ -156,12 +159,11 @@ Section -MainProgram
     
     ; Start Menu
     WriteRegStr ${REG_ROOT} "${REG_APP_PATH}" "" "$INSTDIR\${MAIN_APP_EXE}"
-    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "DisplayName" "${APP_NAME}"
-    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "DisplayIcon" "$INSTDIR\icon.ico"
+    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "DisplayName" "${APP_NAME}"    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "DisplayIcon" "$INSTDIR\icon.ico"
     WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "UninstallString" "$INSTDIR\uninstall.exe"
-    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "Publisher" "${COMP_NAME}"
+    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "Publisher" "${COMP_NAME}" 
     WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "DisplayVersion" "${VERSION}"
-    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "URLInfoAbout" "https://yourcompany.com"
+    WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}" "URLInfoAbout" "https://okayabedin.com"
     
     ; Uninstaller
     WriteUninstaller "$INSTDIR\uninstall.exe"
