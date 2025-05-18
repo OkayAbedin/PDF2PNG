@@ -4,6 +4,30 @@ A simple Windows application to convert PDF files to PNG images with a single cl
 
 Developed by Minhazul Abedin | OkayAbedin
 
+## Project Structure
+
+```
+/
+├── src/                  # Source code
+│   ├── pdf2png_converter.py     # Main application code
+│   ├── splash.py                # Splash screen implementation
+│   └── start_pdf2png.py         # Starter script (without console)
+├── resources/            # Application resources
+│   ├── icon.ico          # Application icon
+│   └── banner.txt        # Banner text
+├── bin/                  # Binary dependencies
+│   └── poppler-bin/      # Poppler binaries for PDF processing
+├── docs/                 # Documentation
+│   ├── user_guide.md     # User guide
+│   ├── release_notes.md  # Release notes
+│   └── EULA.txt          # End User License Agreement
+└── build/                # Build scripts and configuration
+    ├── build.bat         # Main build script
+    ├── PDF2PNG_Converter.spec  # PyInstaller spec for main app
+    ├── requirements.txt  # Python dependencies
+    └── installer.nsi     # NSIS installer script
+```
+
 ## Features
 
 - System tray icon for quick access
@@ -12,27 +36,41 @@ Developed by Minhazul Abedin | OkayAbedin
 - Automatically opens the output folder after conversion
 - Option to run at Windows startup
 
+## Development Setup
+
+1. Make sure you have Python 3.8+ installed
+2. Install the required dependencies:
+   ```
+   pip install -r build/requirements.txt
+   ```
+3. Run the application in development mode:
+   ```
+   python src/splash.py
+   ```
+
+## Building the Application
+
+To build the application into an executable:
+
+1. Make sure you have all dependencies installed
+2. Run the build script:
+   ```
+   cd build
+   ./build.bat
+   ```
+3. The executables will be created in the `dist` folder
+4. To create an installer, install NSIS and run:
+   ```
+   cd build
+   makensis installer.nsi
+   ```
+
 ## Installation
 
-### For Users
-
-1. Download the latest installer (`PDF2PNG_Converter_Setup.exe`) from the releases.
-2. Run the installer and follow the on-screen instructions.
-3. Once installed, the application will appear in your system tray.
-
-### For Developers
-
-To build the application from source:
-
-1. Make sure you have Python 3.8+ installed.
-2. Clone this repository.
-3. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
-4. To build the executable and installer:
-   - Install NSIS (Nullsoft Scriptable Install System) from https://nsis.sourceforge.io/Download
-   - Run `build.bat`
+For end users, simply run the generated installer (`PDF2PNG_Converter_Setup.exe`). This will:
+1. Install the application to your preferred location
+2. Create desktop and Start Menu shortcuts
+3. Add a right-click context menu for PDF files
 
 ## Usage
 
@@ -43,6 +81,13 @@ To build the application from source:
 
 Alternatively, you can right-click on any PDF file and select "Convert to PNG".
 
+## Output Location
+
+All converted PNG images are saved to:
+```
+%USERPROFILE%\Documents\PDF2PNG\
+```
+
 ## Dependencies
 
 - pdf2image (for PDF conversion)
@@ -50,7 +95,7 @@ Alternatively, you can right-click on any PDF file and select "Convert to PNG".
 - Pillow (for image processing)
 - PyInstaller (for building the executable)
 - pywin32 (for Windows integration)
-- Poppler (automatically included in the installer)
+- Poppler (included in the bin directory)
 
 ## License
 
@@ -58,4 +103,4 @@ Alternatively, you can right-click on any PDF file and select "Convert to PNG".
 
 ## Author
 
-Your Name
+Minhazul Abedin | OkayAbedin
